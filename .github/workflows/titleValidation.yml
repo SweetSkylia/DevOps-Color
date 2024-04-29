@@ -1,0 +1,26 @@
+name: PR Title Validation
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize, edited]
+
+jobs:
+  validate_pr_title:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Extract PR title
+        id: pr_info
+        run: |
+          echo "::set-output name=title::$(jq -r '.pull_request.title' $GITHUB_EVENT_PATH)"
+
+      - name: Validate PR title
+        run: |
+          title="${{ steps.pr_info.outputs.title }}"
+          if [[ ! $title =~ (Majeur|Mineur|Patch) ]]; then
+            echo "Le titre de la pull request ne contient pas les mots-clés Majeur, Mineur ou Patch."
+            echo "Veuillez inclure l'un de ces mots-clés dans le titre de votre pull request."
+            exit 1
+          fi
