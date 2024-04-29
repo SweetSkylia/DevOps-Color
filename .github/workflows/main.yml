@@ -1,7 +1,9 @@
 name: Update Version on PR
 
 on:
-  pull_request:
+  push:
+    branches:
+      - '**' 
     types: [opened, reopened, synchronize]
 
 jobs:
