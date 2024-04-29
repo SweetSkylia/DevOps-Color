@@ -64,3 +64,5 @@ jobs:
           title: ${{ steps.new_title.outputs.new_title }}
           token: ${{ secrets.GITHUB_TOKEN }}
           base: master
+          head: ${{ github.ref }}
+
