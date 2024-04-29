@@ -1,3 +1,5 @@
+using System;
+
 namespace DevOps_Color
 {
     internal static class Program
