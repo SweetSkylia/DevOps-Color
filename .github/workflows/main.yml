@@ -42,12 +42,15 @@ jobs:
           # Récupérer la dernière version de la PR
           version="${{ steps.extract_version.outputs.version }}"
 
-          # Exporter la variable version pour qu'elle soit disponible dans les étapes suivantes
-          echo "::set-env name=VERSION::$version"
+          # Écrire la version dans un fichier de sortie
+          echo "$version" > version.txt
+        continue-on-error: true
 
       - name: Debug new title values
         run: |
-          echo "New title value: ${{ env.VERSION }}"
+          # Lire la version depuis le fichier de sortie
+          version=$(cat version.txt)
+          echo "New title value: $version"
           
           # Vérifier si les mots-clés sont présents dans le titre
           if [[ $title == *"Majeur"* ]]; then
