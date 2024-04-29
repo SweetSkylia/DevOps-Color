@@ -86,6 +86,7 @@
             // 
             // pnlCenter
             // 
+            pnlCenter.BackColor = Color.Transparent;
             pnlCenter.Controls.Add(btnGenerer);
             pnlCenter.Controls.Add(btnEnregistrer);
             pnlCenter.Location = new Point(0, 50);
@@ -104,7 +105,6 @@
             FormBorderStyle = FormBorderStyle.None;
             Name = "Form1";
             Text = "Form1";
-            Load += Form1_Load_1;
             pnlTop.ResumeLayout(false);
             pnlCenter.ResumeLayout(false);
             ResumeLayout(false);
