@@ -114,7 +114,7 @@
             // pnlCenter
             // 
             pnlCenter.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            pnlCenter.BackColor = Color.White;
+            pnlCenter.BackColor = Color.Transparent;
             pnlCenter.Controls.Add(btnGenerer);
             pnlCenter.Controls.Add(btnEnregistrer);
             pnlCenter.Location = new Point(0, 50);
