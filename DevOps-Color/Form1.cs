@@ -5,7 +5,7 @@ namespace DevOps_Color
         private bool dragging = false;
         private Point dragCursorPoint;
         private Point dragFormPoint;
-        
+
         public Form1()
         {
             InitializeComponent();
@@ -16,28 +16,9 @@ namespace DevOps_Color
             Application.Exit();
         }
 
-        private void btnNettoyage_Click(object sender, EventArgs e)
-        {
-            //Reset
-        }
-
         private void btnGenerer_Click(object sender, EventArgs e)
         {
             //
-        }
-
-        private void btnEnregisterer_Click(object sender, EventArgs e){
-            //Sauvegarde
-        }
-
-        private void txtUnchampdetexte_TextChanged(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void lblLelabel_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void pnlTop_MouseDown(object sender, MouseEventArgs e)
@@ -59,6 +40,21 @@ namespace DevOps_Color
         private void pnlTop_MouseUp(object sender, MouseEventArgs e)
         {
             dragging = false;
+        }
+
+        private void btnFermer_MouseEnter(object sender, EventArgs e)
+        {
+            btnFermer.BackColor = Color.Red;
+        }
+
+        private void btnFermer_MouseLeave(object sender, EventArgs e)
+        {
+            btnFermer.BackColor = Color.Transparent;
+        }
+
+        private void lblTitre_Click(object sender, EventArgs e)
+        {
+            //
         }
     }
 }
