@@ -42,6 +42,10 @@ jobs:
           # Récupérer la dernière version de la PR
           version="${{ steps.extract_version.outputs.version }}"
 
+      - name: Debug new title values
+        run: |
+          echo "New title value: $version"
+          
           # Vérifier si les mots-clés sont présents dans le titre
           if [[ $title == *"Majeur"* ]]; then
             version=$(echo $version | awk -F. '{$1++} 1' OFS=.)
@@ -56,10 +60,6 @@ jobs:
           # Mettre à jour le titre de la PR avec la nouvelle version
           new_title="$version - $title"
           echo "::set-output name=new_title::$new_title"
-
-      - name: Debug new title values
-        run: |
-          echo "New title value: $version , $title"
 
 
       - name: Update PR title
