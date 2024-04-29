@@ -59,11 +59,13 @@ jobs:
           new_title="$version - $title"
           echo "::set-output name=new_title::$new_title"
 
-      - name: Update PR title
-        if: steps.pr_info.outputs.title != steps.new_title.outputs.new_title
-        uses: peter-evans/create-pull-request@v3
-        with:
-          title: ${{ steps.new_title.outputs.new_title }}
-          token: ${{ secrets.GITHUB_TOKEN }}
-          base: master
-
+          - name: Update PR title
+            if: steps.pr_info.outputs.title != steps.new_title.outputs.new_title
+            run: |
+              new_title="${{ steps.new_title.outputs.new_title }}"
+              pr_number=$(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
+              curl -X PATCH \
+                -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+                -H "Content-Type: application/json" \
+                -d "{\"title\": \"$new_title\"}" \
+                "https://api.github.com/repos/${GITHUB_REPOSITORY}/pulls/${pr_number}"
