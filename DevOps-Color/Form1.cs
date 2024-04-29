@@ -23,11 +23,6 @@ namespace DevOps_Color
             Application.Exit();
         }
 
-        private void btnNettoyage_Click(object sender, EventArgs e)
-        {
-            //Reset
-        }
-
         private void btnGenerer_Click(object sender, EventArgs e)
         {
             GenerateRandomPanels();
@@ -70,6 +65,19 @@ namespace DevOps_Color
             dragging = false;
         }
 
+        private void btnFermer_MouseEnter(object sender, EventArgs e)
+        {
+            btnFermer.BackColor = Color.Red;
+        }
+
+        private void btnFermer_MouseLeave(object sender, EventArgs e)
+        {
+            btnFermer.BackColor = Color.Transparent;
+        }
+
+        private void lblTitre_Click(object sender, EventArgs e)
+        {
+            //
         private void GenerateRandomPanels()
         {
             Controls.Clear();
