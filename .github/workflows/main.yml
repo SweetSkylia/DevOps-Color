@@ -57,9 +57,9 @@ jobs:
           new_title="$version - $title"
           echo "::set-output name=new_title::$new_title"
 
-      - name: Debug new title value
+      - name: Debug new title values
         run: |
-          echo "New title value: $new_title"
+          echo "New title value: $version , $title"
 
 
       - name: Update PR title
