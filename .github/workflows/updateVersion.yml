@@ -56,8 +56,6 @@ jobs:
           # Mettre à jour le titre de la PR avec la nouvelle version
           new_title="$version - $title"
           echo "::set-output name=new_title::$new_title"
-          - name: Checkout branch
-          run: git checkout ${{ github.ref }}
 
       - name: Update PR title
         if: steps.pr_info.outputs.title != steps.new_title.outputs.new_title
@@ -66,5 +64,4 @@ jobs:
           title: ${{ steps.new_title.outputs.new_title }}
           token: ${{ secrets.GITHUB_TOKEN }}
           base: master
-          head: ${{ github.ref }}
 
