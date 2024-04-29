@@ -43,11 +43,11 @@ jobs:
           version="${{ steps.extract_version.outputs.version }}"
 
           # Exporter la variable version pour qu'elle soit disponible dans les étapes suivantes
-          export version
+          echo "::set-env name=VERSION::$version"
 
       - name: Debug new title values
         run: |
-          echo "New title value: $version"
+          echo "New title value: ${{ env.VERSION }}"
           
           # Vérifier si les mots-clés sont présents dans le titre
           if [[ $title == *"Majeur"* ]]; then
