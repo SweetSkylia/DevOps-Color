@@ -42,6 +42,9 @@ jobs:
           # Récupérer la dernière version de la PR
           version="${{ steps.extract_version.outputs.version }}"
 
+          # Exporter la variable version pour qu'elle soit disponible dans les étapes suivantes
+          export version
+
       - name: Debug new title values
         run: |
           echo "New title value: $version"
