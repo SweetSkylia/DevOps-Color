@@ -86,6 +86,7 @@
             // 
             // pnlCenter
             // 
+            pnlCenter.BackColor = Color.Transparent;
             pnlCenter.Controls.Add(btnGenerer);
             pnlCenter.Controls.Add(btnEnregistrer);
             pnlCenter.Location = new Point(0, 50);
