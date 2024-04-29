@@ -58,8 +58,12 @@ jobs:
           fi
 
           # Mettre à jour le titre de la PR avec la nouvelle version
-          new_title="TEST TITRE"
-          echo "::set-output name=new_title::$new_title"
+          export new_title="TEST TITRE"
+        
+      - name: Debug new title values
+        run: |
+          echo "New title value: $new_title"
+
 
       - name: Update PR title
         if: steps.pr_info.outputs.title != steps.new_title.outputs.new_title && steps.new_title.outputs.new_title != ''
