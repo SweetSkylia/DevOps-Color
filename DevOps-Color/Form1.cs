@@ -78,6 +78,7 @@ namespace DevOps_Color
         private void lblTitre_Click(object sender, EventArgs e)
         {
             //
+        }
         private void GenerateRandomPanels()
         {
             Controls.Clear();
