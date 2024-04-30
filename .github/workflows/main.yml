@@ -50,7 +50,6 @@ jobs:
         run: |
           # Lire la version depuis le fichier de sortie
           version=$(cat version.txt)
-          echo "New title value: $version"
           
           # Vérifier si les mots-clés sont présents dans le titre
           if [[ $title == *"Majeur"* ]]; then
@@ -64,21 +63,25 @@ jobs:
           fi
 
           # Mettre à jour le titre de la PR avec la nouvelle version
-          export new_title="TEST TITRE"
-        
-      - name: Debug new title values
-        run: |
-          echo "New title value: $new_title"
+          new_title="${version} - $title"
+          
+          # Enregistrer la nouvelle valeur de new_title dans un fichier de sortie
+          echo "$new_title" > new_title.txt
 
 
       - name: Update PR title
-        if: steps.pr_info.outputs.title != steps.new_title.outputs.new_title && steps.new_title.outputs.new_title != ''
         run: |
-          new_title="${{ steps.new_title.outputs.new_title }}"
+          # Lire la nouvelle valeur de new_title depuis le fichier de sortie
+          new_title=$(cat new_title.txt)
+          
+          # Récupérer le numéro de la PR
           pr_number=$(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
+          
+          # Mettre à jour le titre de la PR via l'API GitHub
           curl -X PATCH \
             -H "Authorization: token ${{ secrets.MY_GITHUB_TOKEN }}" \
             -H "Content-Type: application/json" \
             -d "{\"title\": \"$new_title\"}" \
             "https://api.github.com/repos/${GITHUB_REPOSITORY}/pulls/${pr_number}"
+
 
