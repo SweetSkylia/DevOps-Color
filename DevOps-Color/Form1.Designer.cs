@@ -36,6 +36,7 @@
             pnlTop = new Panel();
             lblTitre = new Label();
             pnlCenter = new Panel();
+            checkBox1 = new CheckBox();
             pnlTop.SuspendLayout();
             pnlCenter.SuspendLayout();
             SuspendLayout();
@@ -115,12 +116,23 @@
             // 
             pnlCenter.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             pnlCenter.BackColor = Color.Transparent;
+            pnlCenter.Controls.Add(checkBox1);
             pnlCenter.Controls.Add(btnGenerer);
             pnlCenter.Controls.Add(btnEnregistrer);
             pnlCenter.Location = new Point(0, 50);
             pnlCenter.Name = "pnlCenter";
             pnlCenter.Size = new Size(1077, 593);
             pnlCenter.TabIndex = 5;
+            // 
+            // checkBox1
+            // 
+            checkBox1.AutoSize = true;
+            checkBox1.Location = new Point(179, 357);
+            checkBox1.Name = "checkBox1";
+            checkBox1.Size = new Size(101, 24);
+            checkBox1.TabIndex = 2;
+            checkBox1.Text = "checkBox1";
+            checkBox1.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -136,6 +148,7 @@
             pnlTop.ResumeLayout(false);
             pnlTop.PerformLayout();
             pnlCenter.ResumeLayout(false);
+            pnlCenter.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -147,5 +160,6 @@
         private Panel pnlTop;
         private Panel pnlCenter;
         private Label lblTitre;
+        private CheckBox checkBox1;
     }
 }
