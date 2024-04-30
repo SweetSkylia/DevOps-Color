@@ -5,7 +5,7 @@ namespace DevOps_Color
         private bool dragging = false;
         private Point dragCursorPoint;
         private Point dragFormPoint;
-
+        private Color[] listeCouleurs = new Color[5];
         public Form1()
         {
             GenerateRandomPanels();
@@ -81,13 +81,20 @@ namespace DevOps_Color
         }
         private void GenerateRandomPanels()
         {
+            Color color;
+            foreach (Control control in Controls)
+            {
+                control.Dispose();
+            }
             Controls.Clear();
             for (int i = 0; i < 5; i++)
             {
                 Panel panel = new Panel();
                 panel.Size = new Size(100, 100); // Taille du panneau
                 panel.Location = new Point(50 + i * 120, 50); // Position du panneau
-                panel.BackColor = GenerateRandomColor(); // Couleur al�atoire pour le fond du panneau
+                color = GenerateRandomColor();
+                listeCouleurs[i] = color;
+                panel.BackColor = color; // Couleur al�atoire pour le fond du panneau
                 this.Controls.Add(panel); // Ajout du panneau au formulaire
             }
             InitializeComponent();
