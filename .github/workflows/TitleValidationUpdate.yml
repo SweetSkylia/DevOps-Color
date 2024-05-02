@@ -35,12 +35,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Get last PR title
-        id: last_pr
-        run: |
-          latest_pr_title=$(curl -s -H "Authorization: token ${{ secrets.MY_GITHUB_TOKEN }}" "https://api.github.com/repos/${GITHUB_REPOSITORY}/pulls?state=closed&sort=updated&direction=desc&per_page=1" | jq -r '.[0].title')
-          echo "::set-output name=last_pr_title::$latest_pr_title"
-
       - name: Extract version from last PR title
         id: extract_version
         run: |
