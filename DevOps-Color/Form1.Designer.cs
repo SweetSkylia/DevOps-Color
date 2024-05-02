@@ -36,19 +36,20 @@
             pnlTop = new Panel();
             lblTitre = new Label();
             pnlCenter = new Panel();
-            checkBox1 = new CheckBox();
+            btnImporter = new Button();
             pnlTop.SuspendLayout();
             pnlCenter.SuspendLayout();
             SuspendLayout();
             // 
             // btnGenerer
             // 
+            btnGenerer.AutoSize = true;
             btnGenerer.BackColor = Color.CornflowerBlue;
             btnGenerer.FlatAppearance.BorderSize = 0;
             btnGenerer.FlatStyle = FlatStyle.Flat;
             btnGenerer.Location = new Point(21, 538);
             btnGenerer.Name = "btnGenerer";
-            btnGenerer.Size = new Size(94, 29);
+            btnGenerer.Size = new Size(94, 30);
             btnGenerer.TabIndex = 0;
             btnGenerer.Text = "Générer";
             btnGenerer.UseVisualStyleBackColor = false;
@@ -56,14 +57,15 @@
             // 
             // btnEnregistrer
             // 
+            btnEnregistrer.AutoSize = true;
             btnEnregistrer.BackColor = Color.CornflowerBlue;
             btnEnregistrer.FlatAppearance.BorderSize = 0;
             btnEnregistrer.FlatStyle = FlatStyle.Flat;
             btnEnregistrer.Location = new Point(136, 538);
             btnEnregistrer.Name = "btnEnregistrer";
-            btnEnregistrer.Size = new Size(94, 29);
+            btnEnregistrer.Size = new Size(94, 30);
             btnEnregistrer.TabIndex = 1;
-            btnEnregistrer.Text = "Enregistrer";
+            btnEnregistrer.Text = "Exporter";
             btnEnregistrer.UseVisualStyleBackColor = false;
             btnEnregistrer.Click += btnEnregistrer_Click;
             // 
@@ -117,7 +119,7 @@
             // 
             pnlCenter.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             pnlCenter.BackColor = Color.Transparent;
-            pnlCenter.Controls.Add(checkBox1);
+            pnlCenter.Controls.Add(btnImporter);
             pnlCenter.Controls.Add(btnGenerer);
             pnlCenter.Controls.Add(btnEnregistrer);
             pnlCenter.Location = new Point(0, 50);
@@ -125,15 +127,19 @@
             pnlCenter.Size = new Size(1077, 593);
             pnlCenter.TabIndex = 5;
             // 
-            // checkBox1
+            // btnImporter
             // 
-            checkBox1.AutoSize = true;
-            checkBox1.Location = new Point(179, 357);
-            checkBox1.Name = "checkBox1";
-            checkBox1.Size = new Size(101, 24);
-            checkBox1.TabIndex = 2;
-            checkBox1.Text = "checkBox1";
-            checkBox1.UseVisualStyleBackColor = true;
+            btnImporter.AutoSize = true;
+            btnImporter.BackColor = Color.CornflowerBlue;
+            btnImporter.FlatAppearance.BorderSize = 0;
+            btnImporter.FlatStyle = FlatStyle.Flat;
+            btnImporter.Location = new Point(250, 538);
+            btnImporter.Name = "btnImporter";
+            btnImporter.Size = new Size(94, 30);
+            btnImporter.TabIndex = 3;
+            btnImporter.Text = "Importer";
+            btnImporter.UseVisualStyleBackColor = false;
+            btnImporter.Click += btnImporter_Click;
             // 
             // Form1
             // 
@@ -161,6 +167,6 @@
         private Panel pnlTop;
         private Panel pnlCenter;
         private Label lblTitre;
-        private CheckBox checkBox1;
+        private Button btnImporter;
     }
 }

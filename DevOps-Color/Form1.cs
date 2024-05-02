@@ -105,5 +105,26 @@ namespace DevOps_Color
             JsonWriter enregistrement = new JsonWriter();
             enregistrement.WriteToJsonFile(listeCouleurs);
         }
+
+        private void btnImporter_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Title = "Sélectionnez un fichier JSON à importer";
+            openFileDialog.Filter = "Fichier JSON (.json)|*.json";
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                string filePath = openFileDialog.FileName;
+
+                JsonReader lecture = new JsonReader();
+                listeCouleurs = lecture.ReadJsonFromFile(filePath);
+
+                foreach (Color couleur in listeCouleurs)
+                {
+                    MessageBox.Show(couleur.Name);
+                }
+
+            }
+        }
+
     }
 }
