@@ -15,11 +15,6 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: '8.0.0' # Utilisez l version 8.0.0 de .NET Core
-
     - name: Restore dependencies
       run: dotnet restore
 
