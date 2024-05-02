@@ -2,7 +2,7 @@ name: PR Title Validation and Version Update
 
 on:
   pull_request:
-    types: [opened, reopened, synchronize, edited]
+    types: [opened, reopened, synchronize]
 
 jobs:
   validate_pr_title:
@@ -19,9 +19,12 @@ jobs:
       - name: Validate PR title
         run: |
           title="${{ steps.pr_info.outputs.title }}"
-          if [[ ! $title =~ (Majeur|Mineur|Patch) ]]; then
-            echo "Le titre de la pull request ne contient pas les mots-clés Majeur, Mineur ou Patch."
-            echo "Veuillez inclure l'un de ces mots-clés dans le titre de votre pull request."
+          if [[ $title =~ Release ]]; then
+            echo "La Pull Request contient le mot-clé Release. Arrêt du processus."
+            exit 0
+          elif [[ ! $title =~ (Majeur|Mineur|Patch) ]]; then
+            echo "Le titre de la Pull Request ne contient pas les mots-clés Majeur, Mineur ou Patch."
+            echo "Veuillez inclure l'un de ces mots-clés dans le titre de votre Pull Request."
             exit 1
           fi
 
@@ -41,8 +44,14 @@ jobs:
       - name: Extract version from last PR title
         id: extract_version
         run: |
-          last_pr_title="${{ steps.last_pr.outputs.last_pr_title }}"
-          version=$(echo "$last_pr_title" | grep -oE '[0-9]+\.[0-9]+\.[0-9]+')
+          latest_pr_titles=$(curl -s -H "Authorization: token ${{ secrets.MY_GITHUB_TOKEN }}" "https://api.github.com/repos/${GITHUB_REPOSITORY}/pulls?state=closed&sort=updated&direction=desc&per_page=100" | jq -r '.[].title')
+          version=""
+          for title in $latest_pr_titles; do
+            version=$(echo "$title" | grep -oE '[0-9]+\.[0-9]+\.[0-9]+')
+            if [[ ! -z "$version" ]]; then
+              break
+            fi
+          done
           if [[ -z "$version" ]]; then
             version="1.0.0"
           fi
@@ -75,14 +84,13 @@ jobs:
           
           # Vérifier si les mots-clés sont présents dans le titre
           if [[ $title == *"Majeur"* ]]; then
-            version=$(echo $version | awk -F. '{$1++} 1' OFS=.)
+              version=$(echo $version | awk -F. '{$1++; $2=0; $3=0} 1' OFS=.)
+          elif [[ $title == *"Mineur"* ]]; then
+              version=$(echo $version | awk -F. '{$2++; $3=0} 1' OFS=.)
+          elif [[ $title == *"Patch"* ]]; then
+              version=$(echo $version | awk -F. '{$3++} 1' OFS=.)
           fi
-          if [[ $title == *"Mineur"* ]]; then
-            version=$(echo $version | awk -F. '{$2++} 1' OFS=.)
-          fi
-          if [[ $title == *"Patch"* ]]; then
-            version=$(echo $version | awk -F. '{$3++} 1' OFS=.)
-          fi
+
 
           # Mettre à jour le titre de la PR avec la nouvelle version
           new_title="${version} - ${title}"
