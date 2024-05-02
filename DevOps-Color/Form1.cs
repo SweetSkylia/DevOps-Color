@@ -99,5 +99,11 @@ namespace DevOps_Color
             }
             InitializeComponent();
         }
+
+        private void btnEnregistrer_Click(object sender, EventArgs e)
+        {
+            JsonWriter enregistrement = new JsonWriter();
+            enregistrement.WriteToJsonFile(listeCouleurs);
+        }
     }
 }

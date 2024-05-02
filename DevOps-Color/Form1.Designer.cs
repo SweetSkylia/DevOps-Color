@@ -65,6 +65,7 @@
             btnEnregistrer.TabIndex = 1;
             btnEnregistrer.Text = "Enregistrer";
             btnEnregistrer.UseVisualStyleBackColor = false;
+            btnEnregistrer.Click += btnEnregistrer_Click;
             // 
             // btnFermer
             // 
