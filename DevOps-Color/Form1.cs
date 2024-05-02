@@ -18,28 +18,28 @@ namespace DevOps_Color
             return Color.FromArgb(random.Next(256), random.Next(256), random.Next(256));
         }
 
-        private void btnQuitter_Click(object sender, EventArgs e)
+        public void btnQuitter_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
 
-        private void btnGenerer_Click(object sender, EventArgs e)
+        public void btnGenerer_Click(object sender, EventArgs e)
         {
             GenerateRandomPanels();
             Refresh();
         }
 
-        private void btnEnregisterer_Click(object sender, EventArgs e)
+        public void btnEnregisterer_Click(object sender, EventArgs e)
         {
             //Sauvegarde
         }
 
-        private void txtUnchampdetexte_TextChanged(object sender, EventArgs e)
+        public void txtUnchampdetexte_TextChanged(object sender, EventArgs e)
         {
 
         }
 
-        private void lblLelabel_Click(object sender, EventArgs e)
+        public void lblLelabel_Click(object sender, EventArgs e)
         {
 
         }
@@ -65,17 +65,17 @@ namespace DevOps_Color
             dragging = false;
         }
 
-        private void btnFermer_MouseEnter(object sender, EventArgs e)
+        public void btnFermer_MouseEnter(object sender, EventArgs e)
         {
             btnFermer.BackColor = Color.Red;
         }
 
-        private void btnFermer_MouseLeave(object sender, EventArgs e)
+        public void btnFermer_MouseLeave(object sender, EventArgs e)
         {
             btnFermer.BackColor = Color.Transparent;
         }
 
-        private void lblTitre_Click(object sender, EventArgs e)
+        public void lblTitre_Click(object sender, EventArgs e)
         {
             //
         }
@@ -100,10 +100,32 @@ namespace DevOps_Color
             InitializeComponent();
         }
 
-        private void btnEnregistrer_Click(object sender, EventArgs e)
+        public void btnEnregistrer_Click(object sender, EventArgs e)
         {
             JsonWriter enregistrement = new JsonWriter();
             enregistrement.WriteToJsonFile(listeCouleurs);
+            MessageBox.Show("Fichier exporté.");
         }
+
+        public void btnImporter_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Title = "Sélectionnez un fichier JSON à importer";
+            openFileDialog.Filter = "Fichier JSON (.json)|*.json";
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                string filePath = openFileDialog.FileName;
+
+                JsonReader lecture = new JsonReader();
+                listeCouleurs = lecture.ReadJsonFromFile(filePath);
+
+                foreach (Color couleur in listeCouleurs)
+                {
+                    MessageBox.Show(couleur.Name);
+                }
+
+            }
+        }
+
     }
 }

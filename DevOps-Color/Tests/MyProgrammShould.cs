@@ -63,7 +63,7 @@ namespace DevOps_Color.Tests
 
             // Assert
             // Vérifiez que le formulaire est fermé
-            Assert.IsTrue(form.IsDisposed);
+            Assert.That(form.IsDisposed, Is.True);
         }
 
         [Test]
