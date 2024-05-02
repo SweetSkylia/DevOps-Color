@@ -18,14 +18,12 @@ jobs:
         run: |
           echo "::set-output name=title::$(jq -r '.pull_request.title' $GITHUB_EVENT_PATH)"
           echo "::set-output name=body::$(jq -r '.pull_request.body' $GITHUB_EVENT_PATH)"
-
+  
       - name: Create Release
         id: create_release
         uses: softprops/action-gh-release@v1
         with:
-          files: '' # Add file paths if needed
-          tag_name: ${{ github.event.pull_request.head.ref }}
-          release_name: ${{ steps.pr_info.outputs.title }}
+          name: ${{ steps.pr_info.outputs.title }}
           body: ${{ steps.pr_info.outputs.body }}
           draft: false
           prerelease: false
