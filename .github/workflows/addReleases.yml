@@ -13,7 +13,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Extract PR title and body
+      - name: Extrct PR title and body
         id: pr_info
         run: |
           echo "::set-output name=title::$(jq -r '.pull_request.title' $GITHUB_EVENT_PATH)"
